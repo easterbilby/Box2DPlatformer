@@ -33,9 +33,6 @@ public class GameScreen implements Screen {
     private World world;
     private SpriteBatch batch;
 
-    private float accumulator = 0;
-    private final float TIME_STEP = 1/60f;
-
     private Array<Block> blocks = new Array<Block>();
     private Character character;
 
@@ -81,7 +78,7 @@ public class GameScreen implements Screen {
         this.character = new Character(this, world, 10,5);
 
 
-        this.character.getBody().applyLinearImpulse(new Vector2(200, 0.0f), this.character.getBody().getWorldCenter(), true);
+        this.character.getBody().applyLinearImpulse(new Vector2(300, 0.0f), this.character.getBody().getWorldCenter(), true);
 
         this.backgrounds = Tools.loadTextures(6,"background/Day/");
 
@@ -99,8 +96,6 @@ public class GameScreen implements Screen {
     }
 
     public void update(float delta) {
-
-        accumulator += Math.min(delta, 0.25f);
 
         world.step(delta, 6, 2);
 
@@ -164,6 +159,10 @@ public class GameScreen implements Screen {
     public void dispose() {
         for(Block block : this.blocks) {
             block.dispose();
+        }
+        character.dispose();
+        for (int index = 0; index < this.backgrounds.length; index++) {
+            this.backgrounds[index].dispose();
         }
 
     }

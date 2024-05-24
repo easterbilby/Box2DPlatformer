@@ -45,8 +45,8 @@ public class MoveableBlock implements Block {
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
         fixtureDef.density = 1f;
-        fixtureDef.friction = 0.1f; // Low friction for ice
-        fixtureDef.restitution = 0.5f; // Some bounciness
+        fixtureDef.friction = 0.1f;
+        fixtureDef.restitution = 0.5f;
 
         body.createFixture(fixtureDef);
         shape.dispose();

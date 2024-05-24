@@ -31,6 +31,7 @@ public class Character implements Block {
     public Character(GameScreen game, World world, float x, float y) {
         this.world = world;
         this.game = game;
+
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         bodyDef.position.set(x, y);
@@ -51,10 +52,6 @@ public class Character implements Block {
         this.body.createFixture(fixtureDef);
         shape.dispose();
 
-        body.setLinearVelocity(new Vector2(0, -5));
-
-        this.textures = new Texture[2];
-
         this.textures = Tools.loadTextures(6,"characters/");
 
         this.body.setUserData("character");
@@ -74,12 +71,13 @@ public class Character implements Block {
     public void update() {
         float dt = Gdx.graphics.getDeltaTime();
 
-        //this.body.applyForceToCenter(new Vector2(18.0f, 0.0f), true);
-        //body.applyLinearImpulse(new Vector2(1.0f, 0.0f), body.getWorldCenter(), true);
-
-
         this.frame += (10 * dt);
         if (this.frame >= 6) this.frame = 0;
+
+        if (this.getPosition().x > 20 && this.getPosition().x < 21) {
+
+            this.body.applyLinearImpulse(new Vector2(5, 5), this.body.getWorldCenter(), true);
+        }
     }
 
     @Override
